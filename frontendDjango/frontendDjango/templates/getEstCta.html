@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Formulario de Estado de Cuenta</title>
+</head>
+<body>
+    <h1>Estado de Cuenta</h1>
+    <form method="GET">
+        <label for="nit">NIT del Cliente:</label>
+        <input type="text" id="nit" name="nit" required />
+        <input type="submit" value="Consultar" />
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Cargo</th>
+                <th>Abono</th>
+                <th>Banco</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+                <tr>
+                    <td>{{ factura.0 }}</td>
+                    <td>{{ factura.1 }}</td>
+                    <td>{{ factura.2 }}</td>
+                    <td>{{ factura.3 }}</td>
+                </tr>
+            {% endfor %}
+            
+
+        </tbody>
+    </table>
+</body>
+</html>

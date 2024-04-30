@@ -24,4 +24,5 @@ urlpatterns = [
     path('setConfig', views.setConfig),
     path('setTrx', views.setTrx),
     path('peticiones', views.peticiones),
+    path('getEstCta', views.getEstCta)
 ]

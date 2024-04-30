@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 app = Flask(__name__)
@@ -20,6 +20,20 @@ def getConfig():
     data = request.data
     with open('Config.xml', 'a') as file:
         file.write(data.decode('utf-8') + '\n')
+
+@app.route('/GetTrx', methods=['GET'])
+def getTrx():
+    try:
+        # Lee el contenido del archivo XML
+        with open('Transac.xml', 'r') as xml_file:
+            xml_content = xml_file.read()
+
+        # Crea una respuesta con el contenido XML
+        response = make_response(xml_content)
+        response.headers['Content-Type'] = 'application/xml'
+        return response
+    except FileNotFoundError:
+        return "Error: El archivo Transac.xml no se encontró"
 
 @app.route('/SaveConfig', methods=['POST'])
 def saveConfig():

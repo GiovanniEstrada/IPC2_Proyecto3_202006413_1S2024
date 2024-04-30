@@ -3,18 +3,15 @@ from xml.dom import minidom
 from .clases.Cliente import Cliente
 import requests
 from django.shortcuts import render
+import xml.etree.ElementTree as ET
+
 
 xml_input = ""
 estado_datos = "Datos Sin Limpiar"
 
 def index(request):
-    global xml
-    xml_input = request.GET.get("xml")
-    if (xml_input is not "" and xml_input is not None):
-        response = requests.post('http://localhost:1000/SaveConfig', data=xml_input)
-        print(response)
-    context = {"xml": xml_input}
-    return render(request, "base.html", context)
+    
+    return render(request, "base.html")
 
 
 def response(request):
@@ -54,10 +51,38 @@ def delete(request):
     return render(request, "base.html", context)
 
 def setConfig(request):
+    global xml
+    xml_input = request.GET.get("xml")
+    if (xml_input is not "" and xml_input is not None):
+        response = requests.post('http://localhost:1000/SaveConfig', data=xml_input)
+        print(response)
+    context = {"xml": xml_input}
     return render(request, "setConfig.html")
 
 def setTrx(request):
+    global xml
+    xml_input = request.GET.get("xml")
+    if (xml_input is not "" and xml_input is not None):
+        response = requests.post('http://localhost:1000/SaveTrx', data=xml_input)
+        print(response)
+    context = {"xml": xml_input}
     return render(request, "setTrx.html")
 
 def peticiones(request):
-    return render(request, "setTrx.html")
+    return render(request, "peticiones.html")
+
+def getEstCta(request):
+    global estado_datos
+    response = requests.get("http://localhost:1000/GetTrx")
+    estado_datos = response.content
+    root = ET.fromstring(estado_datos)
+    facturasR = []
+    for factura in root.findall('.//factura'):
+        r = []
+        r.append(factura.find('fecha').text)
+        r.append(factura.find('numeroFactura').text)
+        r.append(factura.find('NITcliente').text)
+        r.append(factura.find('valor').text)
+        facturasR.append(r)
+    context = {"facturas": facturasR}
+    return render(request, "getEstCta.html", context)

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<config>
+	<clientes>
+		<cliente>
+			<NIT> 115411836 </NIT>
+			<nombre> Cristian Estrada </nombre>
+		</cliente>
+		<cliente>
+			<NIT> 1522 </NIT>
+			<nombre> Giovanni </nombre>
+		</cliente>
+		<cliente>
+			<NIT> 11541186 </NIT>
+			<nombre> Cristian Estrada </nombre>
+		</cliente>
+	</clientes>
+	<bancos>
+		<banco>
+			<codigo> 2 </codigo>
+			<nombre> Banco Industrial </nombre>
+		</banco>
+		<banco>
+			<codigo> 1 </codigo>
+			<nombre> Banco GYT Continenta </nombre>
+		</banco>
+		<banco>
+			<codigo> 11 </codigo>
+			<nombre> Banco GYT Continenta </nombre>
+		</banco>
+	</bancos>
+</config>
