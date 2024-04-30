@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config>
+	<clientes>
+		<cliente>
+			<NIT> 115411836 </NIT>
+			<nombre> Pablo </nombre>
+		</cliente>
+	</clientes>
+	<bancos>
+		<banco>
+			<codigo> 1 </codigo>
+			<nombre> GT </nombre>
+		</banco>
+	</bancos>
+</config>

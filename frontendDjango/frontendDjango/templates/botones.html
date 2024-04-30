@@ -1,0 +1,33 @@
+<!-- botones.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones</title>
+    <script>
+        async function eliminarDatos() {
+            try {
+                const response = await fetch(`http://127.0.0.1:1000/Reset`, {
+                    method: 'DELETE',
+                    mode: 'cors',
+                });
+                if (response.ok) {
+                    alert('Objeto eliminado correctamente');
+                } else {
+                    alert('Error al eliminar el objeto');
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Botones</h1>
+    <button  onclick="eliminarDatos()">Resetear datos</button>
+    <a>Cargar configuración</a>
+    <a>Cargar transacciones</a>
+    <a>Peticiones</a>
+</body>
+</html>
