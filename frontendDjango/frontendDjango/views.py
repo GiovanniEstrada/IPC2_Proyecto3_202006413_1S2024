@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from xml.dom import minidom
 from .clases.Cliente import Cliente
+from .clases.EstadoCuenta import EstadoCuenta
 import requests
 from django.shortcuts import render
 import xml.etree.ElementTree as ET
@@ -73,16 +74,39 @@ def peticiones(request):
 
 def getEstCta(request):
     global estado_datos
+    nit = request.GET.get("nit")
     response = requests.get("http://localhost:1000/GetTrx")
     estado_datos = response.content
     root = ET.fromstring(estado_datos)
-    facturasR = []
-    for factura in root.findall('.//factura'):
-        r = []
-        r.append(factura.find('fecha').text)
-        r.append(factura.find('numeroFactura').text)
-        r.append(factura.find('NITcliente').text)
-        r.append(factura.find('valor').text)
-        facturasR.append(r)
-    context = {"facturas": facturasR}
+
+    if nit is None:
+        facturas = []
+        for factura in root.findall('.//factura'):
+            facturas.append(EstadoCuenta(factura.find('fecha').text, 
+                                        factura.find('valor').text, 
+                                        factura.find('numeroFactura').text))
+        
+        pagos = []
+        for pago in root.findall('.//pago'):
+            nomBanco = requests.get("http://localhost:1000/getBankName", params={"id": pago.find('codigoBanco').text})
+            pagos.append(EstadoCuenta(pago.find('fecha').text, 
+                                        pago.find('valor').text,
+                                        nomBanco.content))
+    else:
+        facturas = []
+        for factura in root.findall('.//factura'):
+            if int(nit) == int(factura.find('NITcliente').text):
+                facturas.append(EstadoCuenta(factura.find('fecha').text, 
+                                            factura.find('valor').text, 
+                                            factura.find('numeroFactura').text))
+        
+        pagos = []
+        for pago in root.findall('.//pago'):
+            if int(nit) == int(pago.find('NITcliente').text):
+                nomBanco = requests.get("http://localhost:1000/getBankName", params={"id": pago.find('codigoBanco').text})
+                pagos.append(EstadoCuenta(pago.find('fecha').text, 
+                                            pago.find('valor').text,
+                                            nomBanco.content))
+
+    context = {"facturas": facturas, "pagos": pagos}
     return render(request, "getEstCta.html", context)

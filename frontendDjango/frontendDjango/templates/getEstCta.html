@@ -1,36 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Formulario de Estado de Cuenta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilos para la tabla (mantenemos los estilos anteriores) */
+        /* ... */
+
+        /* Estilos para el formulario */
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        /* Estilos para las celdas de abono */
+        .abono {
+            color: green;
+        }
+        /* Estilos para las celdas de cargo */
+        .cargo {
+            color: red;
+        }
+    </style>
+    <title>Estado de Cuenta</title>
 </head>
 <body>
     <h1>Estado de Cuenta</h1>
+
     <form method="GET">
-        <label for="nit">NIT del Cliente:</label>
-        <input type="text" id="nit" name="nit" required />
+        <label for="nit">Filtrar por NIT del Cliente:</label>
+        <input type="text" id="nit" name="nit" placeholder="Ingrese el NIT" required />
         <input type="submit" value="Consultar" />
     </form>
+
     <table>
         <thead>
             <tr>
                 <th>Fecha</th>
                 <th>Cargo</th>
                 <th>Abono</th>
-                <th>Banco</th>
             </tr>
         </thead>
         <tbody>
             {% for factura in facturas %}
-                <tr>
-                    <td>{{ factura.0 }}</td>
-                    <td>{{ factura.1 }}</td>
-                    <td>{{ factura.2 }}</td>
-                    <td>{{ factura.3 }}</td>
-                </tr>
+            <tr>
+                <td>{{factura.fecha}}</td>
+                <td class="cargo">Q{{factura.valor}} - (fact #{{factura.desc}})</td>
+                <td></td>
+            </tr>
             {% endfor %}
-            
-
+            {% for pago in pagos %}
+            <tr>
+                <td>{{pago.fecha}}</td>
+                <td></td>
+                <td class="abono">Q{{pago.valor}} - ({{pago.desc}})</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </body>

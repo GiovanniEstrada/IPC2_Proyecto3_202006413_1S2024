@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <respuesta>
 	<clientes>
-		<creados>3</creados>
-		<actualizados>0</actualizados>
+		<creados>0</creados>
+		<actualizados>3</actualizados>
 	</clientes>
 	<bancos>
-		<creados>3</creados>
-		<actualizados>0</actualizados>
+		<creados>0</creados>
+		<actualizados>3</actualizados>
 	</bancos>
 </respuesta>

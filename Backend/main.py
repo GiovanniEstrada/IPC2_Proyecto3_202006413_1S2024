@@ -176,6 +176,25 @@ def saveConfig():
 
     return '¡Configuración guardada!'
 
+@app.route('/getBankName', methods=['GET'])
+def getBankName():
+    id = request.args.get('id')
+    try:
+        # Lee el contenido del archivo XML
+        with open('Config.xml', 'r') as xml_file:
+            xml_content = xml_file.read()
+
+        root = ET.fromstring(xml_content)
+
+        for banco in root.findall('.//banco'):
+            if int(banco.find('codigo').text) == int(id):
+                return str(banco.find('nombre').text)
+
+        return "N/A"
+    except FileNotFoundError:
+        return "Error: El archivo Transac.xml no se encontró"
+
+
 @app.route('/SaveTrx', methods=['POST'])
 def saveTrx():
     data = request.data.decode('utf-8')
