@@ -57,8 +57,11 @@ def setConfig(request):
     if (xml_input is not "" and xml_input is not None):
         response = requests.post('http://localhost:1000/SaveConfig', data=xml_input)
         print(response)
-    context = {"xml": xml_input}
-    return render(request, "setConfig.html")
+    
+    result = requests.get('http://localhost:1000/configResponse')
+    resultadoConfig = result.text
+    context = {"xml": xml_input, "resultadoConfig": resultadoConfig}
+    return render(request, "setConfig.html", context)
 
 def setTrx(request):
     global xml
@@ -66,8 +69,12 @@ def setTrx(request):
     if (xml_input is not "" and xml_input is not None):
         response = requests.post('http://localhost:1000/SaveTrx', data=xml_input)
         print(response)
-    context = {"xml": xml_input}
-    return render(request, "setTrx.html")
+
+    result = requests.get('http://localhost:1000/trxResponse')
+    resultadoConfig = result.text
+
+    context = {"xml": xml_input, "resultadoConfig": resultadoConfig}
+    return render(request, "setTrx.html", context)
 
 def peticiones(request):
     return render(request, "peticiones.html")
@@ -77,6 +84,8 @@ def getEstCta(request):
     nit = request.GET.get("nit")
     response = requests.get("http://localhost:1000/GetTrx")
     estado_datos = response.content
+    if str(estado_datos) == "b''":
+        return render(request, "getEstCta.html")
     root = ET.fromstring(estado_datos)
 
     if nit is None:
@@ -91,7 +100,7 @@ def getEstCta(request):
             nomBanco = requests.get("http://localhost:1000/getBankName", params={"id": pago.find('codigoBanco').text})
             pagos.append(EstadoCuenta(pago.find('fecha').text, 
                                         pago.find('valor').text,
-                                        nomBanco.content))
+                                        nomBanco.text))
     else:
         facturas = []
         for factura in root.findall('.//factura'):
@@ -110,3 +119,6 @@ def getEstCta(request):
 
     context = {"facturas": facturas, "pagos": pagos}
     return render(request, "getEstCta.html", context)
+
+def getReport(request):
+    return render(request, "getReport.html")

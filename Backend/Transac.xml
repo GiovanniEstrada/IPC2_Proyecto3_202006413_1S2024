@@ -17,16 +17,64 @@
 			<numeroFactura> 1 </numeroFactura>
 			<NITcliente> 1245 </NITcliente>
 			<fecha> 10/05/2024 </fecha>
+			<valor> 80</valor>
+		</factura>
+		<factura>
+			<numeroFactura> 1 </numeroFactura>
+			<NITcliente> 1245 </NITcliente>
+			<fecha> 10/05/2024 </fecha>
+			<valor> 10</valor>
+		</factura>
+		<factura>
+			<numeroFactura> 1 </numeroFactura>
+			<NITcliente> 1245 </NITcliente>
+			<fecha> 10/05/2024 </fecha>
 			<valor> 600 </valor>
 		</factura>
 		<factura>
 			<numeroFactura> 1 </numeroFactura>
-			<NITcliente> 1254 </NITcliente>
+			<NITcliente> 1245 </NITcliente>
+			<fecha> 10/05/2024 </fecha>
+			<valor> 600 </valor>
+		</factura>
+		<factura>
+			<numeroFactura> 1 </numeroFactura>
+			<NITcliente> 1245 </NITcliente>
+			<fecha> 10/05/2024 </fecha>
+			<valor> 600 </valor>
+		</factura>
+		<factura>
+			<numeroFactura> 1 </numeroFactura>
+			<NITcliente> 1245 </NITcliente>
 			<fecha> 10/05/2024 </fecha>
 			<valor> 600 </valor>
 		</factura>
 	</facturas>
 	<pagos>
+		<pago>
+			<codigoBanco> 1 </codigoBanco>
+			<fecha> 1 </fecha>
+			<NITcliente> 1 </NITcliente>
+			<valor> 1 </valor>
+		</pago>
+		<pago>
+			<codigoBanco> 1 </codigoBanco>
+			<fecha> 10/05/2024 </fecha>
+			<NITcliente> 1254 </NITcliente>
+			<valor> 600 </valor>
+		</pago>
+		<pago>
+			<codigoBanco> 1 </codigoBanco>
+			<fecha> 1 </fecha>
+			<NITcliente> 1 </NITcliente>
+			<valor> 50 </valor>
+		</pago>
+		<pago>
+			<codigoBanco> 1 </codigoBanco>
+			<fecha> 10/05/2024 </fecha>
+			<NITcliente> 1254 </NITcliente>
+			<valor> 300</valor>
+		</pago>
 		<pago>
 			<codigoBanco> 1 </codigoBanco>
 			<fecha> 1 </fecha>

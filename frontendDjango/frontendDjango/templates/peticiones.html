@@ -4,23 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
-    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+        }
+    </style>
+    <title>Menú Principal</title>
 </head>
-<body class="body-index">
+<body>
     <nav>
         <ul>
             <li>
-                <a href="/"> Inicio </a>
+                <a href="/">Inicio</a>
             </li>
             <li>
-                <a class="btn-enviar" href="getEstCta"> Consulta Estado de Cuenta </button>
+                <a href="getEstCta">Consulta Estado de Cuenta</a>
             </li>
             <li>
-                <a class="btn-enviar" href="getIngresos"> Consulta Ingresos </a>
+                <a href="getReport">Consulta Ingresos</a>
             </li>
         </ul>
     </nav>
+
     {% block content %} {% endblock %}
+
 </body>
 </html>

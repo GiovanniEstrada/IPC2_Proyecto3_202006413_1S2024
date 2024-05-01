@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<transacciones>
+	<facturas>
+		<nuevasFacturas>0</nuevasFacturas>
+		<facturasDuplicadas>13</facturasDuplicadas>
+	</facturas>
+	<pagos>
+		<nuevosPagos>0</nuevosPagos>
+		<pagosDuplicados>13</pagosDuplicados>
+	</pagos>
+</transacciones>

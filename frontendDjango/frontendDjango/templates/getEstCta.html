@@ -1,58 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "peticiones.html" %}
+{% block content %}
     <style>
-        /* Estilos para la tabla (mantenemos los estilos anteriores) */
-        /* ... */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
 
-        /* Estilos para el formulario */
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
         form {
-            margin-bottom: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         label {
+            display: block;
             font-weight: bold;
+            margin-bottom: 10px;
         }
-        input[type="text"] {
-            width: 200px;
-            padding: 5px;
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
         }
+
         input[type="submit"] {
             background-color: #007bff;
-            color: white;
+            color: #ffffff;
             border: none;
-            padding: 5px 10px;
             cursor: pointer;
         }
+
         table {
-            width: 100%;
+            width: 70%;
             border-collapse: collapse;
             font-family: Arial, sans-serif;
+            border-color: #000;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 20px;
+
         }
+
         th, td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        /* Estilos para las celdas de abono */
+
         .abono {
             color: green;
         }
-        /* Estilos para las celdas de cargo */
+
         .cargo {
             color: red;
         }
     </style>
-    <title>Estado de Cuenta</title>
-</head>
-<body>
     <h1>Estado de Cuenta</h1>
 
     <form method="GET">
@@ -86,5 +110,4 @@
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+    {% endblock %}

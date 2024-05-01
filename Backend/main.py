@@ -17,9 +17,45 @@ def reset():
 
 @app.route('/GetConfig', methods=['GET'])
 def getConfig():
-    data = request.data
-    with open('Config.xml', 'a') as file:
-        file.write(data.decode('utf-8') + '\n')
+    try:
+        # Lee el contenido del archivo XML
+        with open('Config.xml', 'r') as xml_file:
+            xml_content = xml_file.read()
+
+        # Crea una respuesta con el contenido XML
+        response = make_response(xml_content)
+        response.headers['Content-Type'] = 'application/xml'
+        return response
+    except FileNotFoundError:
+        return "Error: El archivo Transac.xml no se encontró"
+    
+@app.route('/configResponse', methods=['GET'])
+def configResponse():
+    try:
+        # Lee el contenido del archivo XML
+        with open('configResponse.xml', 'r') as xml_file:
+            xml_content = xml_file.read()
+
+        # Crea una respuesta con el contenido XML
+        response = make_response(xml_content)
+        response.headers['Content-Type'] = 'application/xml'
+        return response
+    except FileNotFoundError:
+        return "Error: El archivo configResponse.xml no se encontró"
+    
+@app.route('/trxResponse', methods=['GET'])
+def trxResponse():
+    try:
+        # Lee el contenido del archivo XML
+        with open('trxResponse.xml', 'r') as xml_file:
+            xml_content = xml_file.read()
+
+        # Crea una respuesta con el contenido XML
+        response = make_response(xml_content)
+        response.headers['Content-Type'] = 'application/xml'
+        return response
+    except FileNotFoundError:
+        return "Error: El archivo trxResponse.xml no se encontró"
 
 @app.route('/GetTrx', methods=['GET'])
 def getTrx():
@@ -328,29 +364,31 @@ def saveTrx():
         f.write(doc.toprettyxml(indent='\t'))
 
     
-    # resp = minidom.Document()
-    # root = resp.createElement('transacciones')
-    # resp.appendChild(root)
-    # clientes = resp.createElement('clientes')
-    # root.appendChild(clientes)
-    # creados = resp.createElement('creados')
-    # creados.appendChild(resp.createTextNode(str(newBill)))
-    # clientes.appendChild(creados)
-    # actualizado = resp.createElement('actualizados')
-    # actualizado.appendChild(resp.createTextNode(str(updBill)))
-    # clientes.appendChild(actualizado)
+    resp = minidom.Document()
+    root = resp.createElement('transacciones')
+    resp.appendChild(root)
+    facturas = resp.createElement('facturas')
+    root.appendChild(facturas)
+    nuevasFacturas = resp.createElement('nuevasFacturas')
+    nuevasFacturas.appendChild(resp.createTextNode(str(newBill)))
+    facturas.appendChild(nuevasFacturas)
 
-    # bancos = resp.createElement('bancos')
-    # root.appendChild(bancos)
-    # creadoBnk = resp.createElement('creados')
-    # creadoBnk.appendChild(resp.createTextNode(str(newBuy)))
-    # bancos.appendChild(creadoBnk)
-    # actualizaBnk = resp.createElement('actualizados')
-    # actualizaBnk.appendChild(resp.createTextNode(str(updBuy)))
-    # bancos.appendChild(actualizaBnk)
+    facturasDuplicadas = resp.createElement('facturasDuplicadas')
+    facturasDuplicadas.appendChild(resp.createTextNode(str(updBill)))
+    facturas.appendChild(facturasDuplicadas)
 
-    # with open('configResponse.xml', 'w') as f:
-    #     f.write(resp.toprettyxml(indent='\t'))
+    facturas = resp.createElement('pagos')
+    root.appendChild(facturas)
+    nuevasFacturas = resp.createElement('nuevosPagos')
+    nuevasFacturas.appendChild(resp.createTextNode(str(newBuy)))
+    facturas.appendChild(nuevasFacturas)
+
+    pagosDuplicados = resp.createElement('pagosDuplicados')
+    pagosDuplicados.appendChild(resp.createTextNode(str(updBuy)))
+    facturas.appendChild(pagosDuplicados)
+
+    with open('trxResponse.xml', 'w') as f:
+        f.write(resp.toprettyxml(indent='\t'))
 
     return '¡Configuración guardada!'
 
